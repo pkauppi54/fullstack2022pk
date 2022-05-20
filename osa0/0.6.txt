@@ -1,0 +1,3 @@
+note over selain: Muistiinpanon lähetys aktivoi js koodissa kuuntelijan, joka lähettää muistiinpanon tiedostoon new_note_spa
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+palvelin-->selain: json koodi
