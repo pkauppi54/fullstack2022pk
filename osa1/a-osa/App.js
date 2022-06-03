@@ -17,6 +17,7 @@ const App = () => {
             <p>props.part props.exercise</p>
         )
     }
+    
     const Content = () => {
         return (
             <div>
