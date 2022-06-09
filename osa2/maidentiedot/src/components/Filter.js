@@ -1,7 +1,7 @@
 const Filter = (props) => {
     return (
         <div>
-        Filter shown with: 
+        Search for countries:
         <input 
             value={props.newFilt}
             onChange={props.handleFiltChange} />
