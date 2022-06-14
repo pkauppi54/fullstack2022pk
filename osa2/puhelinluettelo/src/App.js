@@ -1,22 +1,27 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Persons from "./components/Persons"
 import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
+import numberService from "./services/numberService"
+
 
 const App = () => {
   
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", phone: "+358-40982781" },
-    { name: 'Ada Lovelace', phone: '39-44-5323523' },
-    { name: 'Dan Abramov', phone: '12-43-234345' },
-    { name: 'Mary Poppendieck', phone: '39-23-6423122' }
-  ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState("")
   const [names, setNames] = useState([])
   const [newPhone, setNewPhone] = useState("")
   const [phones, setPhones] = useState([])
   const [newFilt, setNewFilt] = useState("")
 
+  useEffect(() => {
+    numberService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+  }, [] )
+  
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().includes(newFilt))
 
@@ -32,13 +37,18 @@ const App = () => {
       const personObject = {
         name: newName,
         phone: newPhone,
-        id: newName
       }
-      setPersons(persons.concat(personObject)) 
-      setNewName("")
-      setNewPhone("")
+      numberService
+        .create(personObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName("")
+          setNewPhone("")
+        })
+      
     }
   }
+
 
   const addName = (event) => {
     setNames(names.concat(newName))
@@ -71,7 +81,8 @@ const App = () => {
         newName={newName}
         newPhone={newPhone}
         handleNameChange={handleNameChange} 
-        handlePhoneChange={handlePhoneChange} />
+        handlePhoneChange={handlePhoneChange}
+         />
 
       <h2>Numbers</h2>
         <Persons personsToShow={personsToShow} />
@@ -83,6 +94,5 @@ const App = () => {
 
 
 export default App
-
 
 

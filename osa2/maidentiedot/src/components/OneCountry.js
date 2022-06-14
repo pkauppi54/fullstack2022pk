@@ -1,3 +1,4 @@
+import Country from "./Country"
 
 const OneCountry = ({countriesToShow}) => {
     const country = countriesToShow[0]
@@ -23,3 +24,7 @@ const OneCountry = ({countriesToShow}) => {
 }
 
 export default OneCountry
+
+
+
+

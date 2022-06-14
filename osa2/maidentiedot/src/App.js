@@ -15,9 +15,17 @@ const App = () => {
       .get("https://restcountries.com/v3.1/all")
       .then(response => {
         setCountries(response.data)
-      
       })
   }, [] )
+
+  // useEffect(() => {
+  //   const api = process.env.REACT_APP_API_KEY
+  //   axios
+  //     .get("")
+  //     .then(response => {
+
+  //     })
+  // })
  
 
   const countriesToShow = countries.filter(country => country.name.common.toLowerCase().includes(newFilt.toLowerCase()))
@@ -33,7 +41,7 @@ const App = () => {
     <div>
       <Filter newFilt={newFilt} handleFiltChange={handleFiltChange}/>
       
-      <Countries countriesToShow={countriesToShow} />
+      <Countries setNewFilt={setNewFilt} countriesToShow={countriesToShow} />
     </div> 
   )
 }
