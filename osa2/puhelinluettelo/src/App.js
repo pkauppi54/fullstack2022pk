@@ -27,9 +27,17 @@ const App = () => {
   }, [] )
 
   const deletePerson = (id) => {
-    
-    setPersons(persons.filter(person => person.id !== id))
-    
+    try {
+      setPersons(persons.filter(person => person.id !== id))
+    }
+    catch (error ) {
+      setErrorMessage(
+        `Information of has already been removed from server`
+      )
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 3000)
+    }
     setSuccessMessage(
       `Deleted`
     )
@@ -58,7 +66,7 @@ const App = () => {
         .catch(error => {
           setErrorMessage(
             `Information of ${changedPerson.name} has already been removed from server`
-            )
+          )
           setTimeout(() => {
             setErrorMessage(null)
           }, 3000)
@@ -79,6 +87,14 @@ const App = () => {
       }
       numberService
         .create(personObject)
+        .catch(error => {
+          setErrorMessage(
+            `Information of xxx has already been removed from server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 3000)
+        })
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
           setSuccessMessage(
@@ -132,7 +148,7 @@ const App = () => {
          />
 
       <h2>Numbers</h2>
-        <Persons personsToShow={personsToShow} deletePerson={deletePerson} />
+        <Persons personsToShow={personsToShow} deletePerson={deletePerson} setErrorMessage={setErrorMessage}/>
     </div>
   )
 
