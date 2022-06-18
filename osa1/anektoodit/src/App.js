@@ -18,8 +18,12 @@ const App = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
   ]
-   
+
+  
+
+  
   const [selected, setSelected] = useState(0)
+<<<<<<< HEAD
   const [votes, setVote] = useState(new Uint8Array(7))
 
   console.log(votes)
@@ -28,6 +32,10 @@ const App = () => {
   f[3] += 100
   
   console.log(f)
+=======
+  let [copy, setCopy] = useState(new Uint8Array(anecdotes.length))
+  let [high, setHigh] = useState(0)
+>>>>>>> a5bdfdcee2dbaa35a11b5b47c58b2757792d5674
 
   const randomSelect = () => {
     var randomNumber = Math.floor(Math.random() * 7)
@@ -39,6 +47,7 @@ const App = () => {
   // const votes = new Uint8Array(7)
   
 
+<<<<<<< HEAD
   // const f = [...votes]
   // // f[selected] += 10
   // console.log(f)
@@ -53,6 +62,33 @@ const App = () => {
       <Button handleClick={randomSelect} text="More wisdom" />
       
       
+=======
+  const handleVote = () => {
+    copy = [...copy]
+    copy[selected] += 1
+    setCopy(copy)
+  }
+
+  console.log(copy)
+
+  const highestNum = () => {
+        const highest = Math.max(...copy)
+        const highIndex = copy.indexOf(highest)
+        const highestAnectode = anecdotes[highIndex]
+        setHigh(highestAnectode)
+  }
+
+  console.log(high)
+
+  return ( 
+    <div>
+      {anecdotes[selected]} <br/>
+      <Button handleClick={randomSelect} text="More wisdom" />
+      <Button handleClick={handleVote} text="vote" /> <br/>
+      <p>Votes: {copy[selected]}</p>
+      <Button handleClick={highestNum} text="highest voted" />
+      <p>{high}</p>
+>>>>>>> a5bdfdcee2dbaa35a11b5b47c58b2757792d5674
     </div>
   )
 }
