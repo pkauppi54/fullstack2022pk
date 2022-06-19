@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import Filter from "./components/Filter"
 import axios from "axios"
+import Countries from "./components/Countries"
+
 
 const App = () => {
 
   const [newFilt, setNewFilt] = useState("")
   const [countries, setCountries] = useState([])
+  
 
   useEffect(() => {
     axios
@@ -14,9 +17,26 @@ const App = () => {
         setCountries(response.data.name)
       })
   }, [] )
+<<<<<<< HEAD
   
+=======
+
+  // useEffect(() => {
+  //   const api = process.env.REACT_APP_API_KEY
+  //   axios
+  //     .get("")
+  //     .then(response => {
+
+  //     })
+  // })
+ 
+
+  const countriesToShow = countries.filter(country => country.name.common.toLowerCase().includes(newFilt.toLowerCase()))
+>>>>>>> 217234f8e925df074d1b93a434cb05cb0bc51cc3
   
+
   
+<<<<<<< HEAD
     
   // Search countries from the API with the newFilt then display the needed aspects with an if statement (>10 countries)
   //const countriesToShow = countries.filter(country => country.name.common.includes(newFilt))
@@ -24,32 +44,19 @@ const App = () => {
 
 
 
+=======
+>>>>>>> 217234f8e925df074d1b93a434cb05cb0bc51cc3
   const handleFiltChange = (event) => {
     setNewFilt(event.target.value)
   }
 
 
-
-
-
-
   return (
     <div>
       <Filter newFilt={newFilt} handleFiltChange={handleFiltChange}/>
-      {countriesToShow}
-      {/* <h1>{country.name}</h1>
-      <p>capital {country.capital} <br/>
-      area {country.area} </p>
-
-      <h3>languages</h3>
-      {/* <ul>
-        country.languages.map(language => {
-          <li>{language}</li>
-        })
-      </ul> */}
+      
+      <Countries setNewFilt={setNewFilt} countriesToShow={countriesToShow} />
     </div> 
-
-
   )
 }
 
